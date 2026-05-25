@@ -2,12 +2,17 @@ import {
 	BookmarkCheck,
 	CheckCircle2,
 	Circle,
+	ExternalLink,
 	Heart,
 	Image,
 	MessageCircle,
 	Repeat2,
 } from "lucide-react";
-import { formatCompactNumber, formatShortTimestamp } from "#/lib/present";
+import {
+	formatCompactNumber,
+	formatShortTimestamp,
+	tweetUrl,
+} from "#/lib/present";
 import type {
 	TimelineItem,
 	TweetEntities,
@@ -483,6 +488,23 @@ export function TimelineCard({
 								<span>{displayMediaCount}</span>
 							</span>
 						) : null}
+						<a
+							className={cx(feedActionButtonClass, "ml-auto")}
+							href={tweetUrl(displayAuthor.handle, interactionTweetId)}
+							target="_blank"
+							rel="noopener noreferrer"
+							onClick={(event) => event.stopPropagation()}
+							aria-label="Open on X"
+							title="Open original tweet on X"
+						>
+							<span className={feedActionIconWrapClass}>
+								<ExternalLink
+									className={feedActionIconClass}
+									strokeWidth={1.7}
+								/>
+							</span>
+							<span className="text-[13px]">Open on X</span>
+						</a>
 					</div>
 				</footer>
 				{conversation.isOpen ? (
